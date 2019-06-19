@@ -1,0 +1,15 @@
+.player {
+    background: fade-out(white, .15);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    border: 2px solid darken($off-white, 10%);
+    border-radius: 5px;
+}
+
+.player__items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

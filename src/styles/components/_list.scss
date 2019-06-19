@@ -1,0 +1,78 @@
+.list-header {
+    background: fade-out(white, .15);
+    border-radius: 5px;
+    border: 2px solid darken($off-white, 10%);
+    color: $grey;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: $s-size $m-size;
+    margin: $m-size 0;
+}
+
+
+
+.list-item {
+    background: fade-out(white, .15);
+    display: flex;
+    flex-direction: row;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 5px solid darken($off-white, 10%);
+    border-radius: 5px;
+    color: $dark-grey;
+    padding: 1rem;
+    justify-content: space-between;
+    text-decoration: none;
+    margin: 0.8rem 1rem;
+
+    @media (min-width: $desktop-breakpoint) {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 1rem;
+        align-items: center;
+    }
+}
+
+.list-button {
+    @extend .list-item;
+    justify-content: center;
+}
+
+.list-item--message {
+    align-items: center;
+    justify-content: center;
+    color: $grey;
+    padding: $m-size;
+    &:hover {
+        background: none;
+    }
+}
+
+.list-item__title {
+    margin: 0;
+    word-break: break-all;
+}
+
+.list-item__subtitle {
+    color: $grey;
+    font-size: 1.4rem;
+}
+
+.list-item__data {
+    margin: $s-size 0 0 0;
+
+    @media (min-width: $desktop-breakpoint) {
+        margin: 0;
+        padding-left: $s-size;
+    }
+}
+
+.list-body {
+    margin-bottom: $m-size;
+
+    @media(min-width: $desktop-breakpoint) {
+        margin-bottom: $l-size;
+    }
+}

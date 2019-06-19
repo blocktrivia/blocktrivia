@@ -1,0 +1,29 @@
+.question {
+    display: flex;
+    flex-direction: column;
+}
+
+.question__option {
+    background: $blue;
+    color: white;
+    padding: $s-size;
+    font-weight: 300;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-around;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    margin: 0.8rem 1rem;
+    border-bottom: 5px solid darken($blue, 10%);
+    border-radius: 5px;
+}
+
+.question-background {
+    background: fade-out(white, .15);
+    margin-bottom: 1.6rem;
+    padding: 1rem;
+    border: 2px solid #dedede;
+    border-radius: 5px;
+    margin-top: $m-size;
+}

@@ -1,0 +1,18 @@
+.form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    > * {
+        margin-bottom: $m-size;
+    }
+}
+
+.form__error {
+    margin: 0 0 $m-size 0;
+    font-style: italic;
+}
+
+.form__picker {
+    display: flex;
+    justify-content: center;
+}
