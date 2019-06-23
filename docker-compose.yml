@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+   blocktrivia:
+     build: ./
+     restart: unless-stopped
+    #  depends_on:
+      #  - mongo
+     environment:
+       VIRTUAL_HOST: ${DOMAINS}
+       LETSENCRYPT_HOST: ${DOMAINS}
+       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+       PORT: ${PORT}
+
+  #  mongo:
+    #  image: mongo
+    #  ports:
+    #    - "27017:27017"
+
+networks:
+    default:
+       external:
+         name: ${NETWORK}
