@@ -56,8 +56,21 @@ module.exports = (env) => {
         ],
         devtool: isProduction ? "source-map" :'inline-source-map',
         devServer: {
-            contentBase: path.join(__dirname, "public"),
             historyApiFallback: true,
+            watchOptions: { aggregateTimeout: 300, poll: 1000 },
+            headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Methods': 'GET',
+            'X-random': 'random'
+            },
+            proxy: {
+                '/socket.io': {
+                    target: 'http://localhost:4300',
+                    ws: true
+                }
+            },
+            contentBase: path.join(__dirname, "public"),
             publicPath: "/dist/"
         },
         

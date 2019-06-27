@@ -66,7 +66,7 @@ export class JoinGamePage extends React.Component {
             if (res.code === "success") {
                 this.setState({ error: "" })
                 this.props.setRoom(this.state.room);
-                this.props.history.push("/lobby");
+                this.props.history.push("/game/lobby");
             } else {
                 this.setState({ error: res.msg })
             }
@@ -102,17 +102,8 @@ export class JoinGamePage extends React.Component {
                                 className="text-input"
                             />
 
-                            <div className="form__picker">
-                                <HuePicker
-                                    color={this.state.colour}
-                                    onChangeComplete={this.handleChangeComplete}
-                                />
-                            </div>
-
                             <button className="button">Join</button>
-
-
-
+                            
                         </form>
 
                     </Fade>

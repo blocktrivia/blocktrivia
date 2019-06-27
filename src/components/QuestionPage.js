@@ -69,7 +69,7 @@ export class QuestionPage extends React.Component {
                                             <div className="question-background">
                                                 <QuestionOptions type={this.props.type} message={this.props.question.message} submitAnswer={this.submitAnswer} options={this.props.question.options} />
                                             </div>
-                                            {this.props.type === "HOST" && <Players players={this.props.players} />}
+                                            <Players players={this.props.players} />
                                         </div>
                                         :
                                         <div>

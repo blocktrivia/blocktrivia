@@ -75,13 +75,13 @@ socket.on("newQuestion", (res) => {
          store.dispatch(setMessage(""));
          store.dispatch(resetStroke());
          store.dispatch(setQuestion(res.question));
-         history.push("/play");
+         history.push("/game/play");
       }, 2000);
    } else {
       store.dispatch(setMessage(""));
       store.dispatch(setStatus("active"));
       store.dispatch(setQuestion(res.question));
-      history.push("/play");
+      history.push("/game/play");
    }
 
    

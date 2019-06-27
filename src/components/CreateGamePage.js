@@ -53,7 +53,7 @@ export class CreateGamePage extends React.Component {
             if (res.code === "success") {
                 this.setState({ error: "" })
                 this.props.setRoom(this.state.room);
-                this.props.history.push("/lobby");
+                this.props.history.push("/game/lobby");
             } else {
                 this.setState({ error: res.msg })
             }

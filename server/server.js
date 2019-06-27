@@ -64,7 +64,8 @@ io.on("connection", (socket) => {
 
             if (!games.checkRoomName(config.room)) {
                 if (games.checkUsername(config.room, config.name)) {
-                    if (web3.utils.isAddress(config.name)) {
+                    // if (web3.utils.isAddress(config.name))
+                    if (true) {
                         games.addPlayer(config.room, config.name, socket.id);
                         socket.join(config.room);
                         socket.emit("joinedRoom");
