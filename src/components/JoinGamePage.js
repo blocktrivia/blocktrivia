@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { setRoom } from '../actions/game';
 import { HuePicker } from 'react-color';
 import Fade from 'react-reveal/Fade';
-
+import { withCookies, Cookies } from 'react-cookie';
 
 export class JoinGamePage extends React.Component {
 
@@ -15,10 +15,26 @@ export class JoinGamePage extends React.Component {
         this.state = {
             room: "",
             name: "",
+            username: "",
             colour: "#00FFF3",
-            error: ""
+            error: "",
         }
     };
+
+    componentDidMount() {
+        const { cookies } = this.props;
+        let ethAddr = cookies.get('ethAddr');
+        let blockstackSession = JSON.parse(localStorage.getItem('blockstack-session'));
+        
+        let userData = blockstackSession.userData;
+
+        if (ethAddr) {
+            this.setState({
+                name: ethAddr,
+                username: userData.username
+            })
+        }
+    }
 
     onRoomChange = (e) => {
         const room = e.target.value;
@@ -55,10 +71,13 @@ export class JoinGamePage extends React.Component {
 
     submitForm = (e) => {
         e.preventDefault();
+        
         const config = {
-           name: this.state.name,
+           name: this.state.username,
+           username: this.state.username,
            colour: this.state.colour,
-           room: this.state.room 
+           room: this.state.room,
+           ethAddress: this.state.name
         }
 
         socket.emit("joinRoom", config, (res) => {
@@ -122,4 +141,4 @@ const mapDispatchToProps = (dispatch) => ({
     setRoom: (room) => dispatch(setRoom(room))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(JoinGamePage);
+export default connect(mapStateToProps, mapDispatchToProps)(withCookies(JoinGamePage));

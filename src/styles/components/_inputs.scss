@@ -14,3 +14,23 @@
     @extend .text-input;
     height: 10rem;
 }
+
+input,
+textarea,
+select {
+    outline: none;
+}
+
+input,
+textarea {
+    border-radius: 6px;
+}
+
+input:focus,
+input:hover,
+textarea:focus,
+textarea:hover,
+select:focus,
+select:hover {
+    border: 1px solid #474787;
+}

@@ -5,7 +5,6 @@ import { setHost, setPlayer } from '../actions/clientType';
 import { setRoom } from '../actions/game';
 import Fade from 'react-reveal/Fade';
 import { withCookies, Cookies } from 'react-cookie';
-import uuid from "uuid";
 
 export class DashboardPage extends React.Component {
     constructor(props) {

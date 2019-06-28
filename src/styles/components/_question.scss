@@ -4,7 +4,7 @@
 }
 
 .question__option {
-    background: $blue;
+    background: #474787;
     color: white;
     padding: $s-size;
     font-weight: 300;
@@ -15,8 +15,9 @@
     border-left: none;
     border-right: none;
     margin: 0.8rem 1rem;
-    border-bottom: 5px solid darken($blue, 10%);
+    border-bottom: 5px solid darken(#474787, 10%);
     border-radius: 5px;
+    outline: none;
 }
 
 .question-background {

@@ -64,9 +64,8 @@ io.on("connection", (socket) => {
 
             if (!games.checkRoomName(config.room)) {
                 if (games.checkUsername(config.room, config.name)) {
-                    // if (web3.utils.isAddress(config.name))
-                    if (true) {
-                        games.addPlayer(config.room, config.name, socket.id);
+                    if (web3.utils.isAddress(config.ethAddress)) {
+                        games.addPlayer(config.room, config.name, config.username, socket.id);
                         socket.join(config.room);
                         socket.emit("joinedRoom");
                         var game = games.getGameByRoom(config.room);
@@ -76,7 +75,7 @@ io.on("connection", (socket) => {
                     } else {
                         callback({
                             code: "NAMEERROR",
-                            msg: `${config.name} is an invalid address!`
+                            msg: `${config.ethAddress} is an invalid address!`
                         });
                     }
                 } else {
@@ -153,6 +152,7 @@ io.on("connection", (socket) => {
                     var response = [];
                     players.forEach((player) => {
                         var p = {
+                            bstackusername: player.name,
                             name: player.username,
                             score: player.score
                         };

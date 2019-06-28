@@ -1,5 +1,5 @@
 .box-layout {
-    background: #209cee;
+    background: #f3f3f3;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,10 +10,11 @@
 .box-layout__box {
     background: fade-out(white, .15);
     border-radius: 5px;
-    border: 2px solid darken($off-white, 10%);
+    border: 1px solid darken($off-white, 10%);
     text-align: center;
     padding: $l-size $m-size;
     margin: $m-size 0;
+    position: relative;
 }
 
 .box-layout__title {
