@@ -232,8 +232,10 @@ function setupQuestion(roomName) {
 function sendTokens(address, value) {
     if (value < 1) return;
     
-    console.log("Minting " + value + " tokens to " + address);
-    contract.methods.mint(address, web3.utils.toWei(value.toString(), "ether")).send()
+    // console.log("Minting " + value + " tokens to " + address);
+    // contract.methods.mint(address, web3.utils.toWei(value.toString(), "ether")).send()
+    console.log("Sending " + value + " tokens to " + address);
+    contract.methods.transfer(address, web3.utils.toWei(value.toString(), "ether")).send()
     .on('transactionHash', (hash) => {
         console.log("Transaction hash: " + hash)
     })

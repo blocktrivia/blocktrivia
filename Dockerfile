@@ -17,4 +17,4 @@ COPY --from=builder . .
 # Bash install
 # RUN apk add --no-cache bash
 
-CMD [ "pm2-runtime", "start", "ecosystem.config.js" ]
+CMD [ "pm2-runtime", "start", "ecosystem.config.js", "--env", "production" ]

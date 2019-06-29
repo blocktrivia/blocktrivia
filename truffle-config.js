@@ -27,8 +27,6 @@
 const HDWalletProvider = require("truffle-hdwallet-provider");
 require('dotenv').config()
 
-const provider = () => new HDWalletProvider(process.env.PRIVATE_KEY, process.env.INFURA_ENDPOINT);
-
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -75,10 +73,21 @@ module.exports = {
     // },
 
     ropsten: {
-      provider: provider,
+      provider: () => new HDWalletProvider(process.env.PRIVATE_KEY, process.env.INFURA_ROPSTEN_ENDPOINT),
       network_id: 3,       // Ropsten's id
       gas: 5500000,        // Ropsten has a lower block limit than mainnet
       confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    },
+
+    mainnet: {
+      provider: () => new HDWalletProvider(process.env.PRIVATE_KEY, process.env.INFURA_MAINNET_ENDPOINT),
+      network_id: 1,       // Mainnet's id
+      gas: 2000000,        // 2,000,000
+      gasPrice: 1000000000,  // 1 gwei (in wei)
+      production: true,
+      confirmations: 0,    // # of confs to wait between deployments. (default: 0)
       timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     },
