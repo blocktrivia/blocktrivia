@@ -26,7 +26,7 @@ export class LoginPage extends React.Component {
                                 Hello,
                             </div>
                             <div>
-                                Please sign in with <span>Blocktack</span> in order to use this application.
+                                Please sign in with <span>Blockstack</span> in order to use this application.
                             </div>
                         </div>
                         <div 

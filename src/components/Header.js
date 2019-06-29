@@ -13,7 +13,7 @@ export class Header extends React.Component {
         super(props);
         this.userSession = new UserSession()
         if (this.userSession.isUserSignedIn()) {
-            this.user = this.userSession.loadUserData().username;
+            this.user = this.userSession.loadUserData().username ? this.userSession.loadUserData().username : "ID-" + this.userSession.loadUserData().identityAddress;
         }
     }
 

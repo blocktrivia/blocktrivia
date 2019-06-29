@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import { socket } from '../app';
 import { Redirect } from 'react-router-dom';
 import { setRoom } from '../actions/game';
-import { HuePicker } from 'react-color';
 import Fade from 'react-reveal/Fade';
-import { withCookies, Cookies } from 'react-cookie';
+import { withCookies } from 'react-cookie';
 
 export class JoinGamePage extends React.Component {
 
@@ -15,25 +14,25 @@ export class JoinGamePage extends React.Component {
         this.state = {
             room: "",
             name: "",
-            username: "",
             colour: "#00FFF3",
-            error: "",
+            ethAddress: "",
+            error: ""
         }
     };
 
     componentDidMount() {
         const { cookies } = this.props;
-        let ethAddr = cookies.get('ethAddr');
-        let blockstackSession = JSON.parse(localStorage.getItem('blockstack-session'));
-        
-        let userData = blockstackSession.userData;
+        let ethAddress = cookies.get('ethAddress');
 
-        if (ethAddr) {
-            this.setState({
-                name: ethAddr,
-                username: userData.username
-            })
+        if (ethAddress) {
+            this.setState({ ethAddress });
         }
+
+        let blockstackSession = JSON.parse(localStorage.getItem('blockstack-session'));
+        let userData = blockstackSession.userData;
+        this.setState({
+            name: userData.username ? userData.username : "ID-" + userData.identityAddress
+        });
     }
 
     onRoomChange = (e) => {
@@ -41,8 +40,8 @@ export class JoinGamePage extends React.Component {
         this.setState({ room });
     };
 
-    onNameChange = (e) => {
-        const name = e.target.value;
+    onEthAddressChange = (e) => {
+        const ethAddress = e.target.value;
 
         function hashCode(str) { // java String#hashCode
             var hash = 0;
@@ -60,24 +59,19 @@ export class JoinGamePage extends React.Component {
             return "00000".substring(0, 6 - c.length) + c;
         }
 
-        this.setState({ colour: '#' + intToRGB(hashCode(name)) });
+        this.setState({ colour: '#' + intToRGB(hashCode(ethAddress)) });
 
-        this.setState({ name });
-    };
-
-    handleChangeComplete = (color) => {
-        this.setState({ colour: color.hex });
+        this.setState({ ethAddress });
     };
 
     submitForm = (e) => {
         e.preventDefault();
         
         const config = {
-           name: this.state.username,
-           username: this.state.username,
+           name: this.state.name,
            colour: this.state.colour,
            room: this.state.room,
-           ethAddress: this.state.name
+           ethAddress: this.state.ethAddress
         }
 
         socket.emit("joinRoom", config, (res) => {
@@ -116,8 +110,8 @@ export class JoinGamePage extends React.Component {
                             <input
                                 type="text"
                                 placeholder="Ethereum Address"
-                                value={this.state.name}
-                                onChange={this.onNameChange}
+                                value={this.state.ethAddress}
+                                onChange={this.onEthAddressChange}
                                 className="text-input"
                             />
 

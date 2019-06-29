@@ -92,8 +92,8 @@ export class QuestionPage extends React.Component {
                                 {
                                     this.props.scoreboard.map((player) => {
                                         return (
-                                            <div key={player.bstackusername} className="list-item">
-                                                <h3>{player.bstackusername}</h3>
+                                            <div key={player.name} className="list-item">
+                                                <h3>{player.name}</h3>
                                                 <h3>{player.score > 0 ? 'You won ' +  player.score + " BTV!" : player.score}</h3>
                                             </div>
                                         )

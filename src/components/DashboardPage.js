@@ -11,7 +11,7 @@ export class DashboardPage extends React.Component {
         super(props);
 
         this.state = {
-            hasEthereum: false,
+            // hasEthereum: false,
             room: "",
             category: "0",
             difficulty: "any",
@@ -24,28 +24,31 @@ export class DashboardPage extends React.Component {
     componentDidMount() {
         const { cookies } = this.props;
 
-        let ethAddr = cookies.get('ethAddr');
+        let ethAddress = cookies.get('ethAddress');
         let blockstackSession = JSON.parse(localStorage.getItem('blockstack-session'));
         
         let userData = blockstackSession.userData;
 
-        if (ethAddr) {
-            this.setState({
-                hasEthereum: true
-            })
-        }
+        // if (ethAddress) {
+        //     this.setState({
+        //         hasEthereum: true
+        //     })
+        // }
 
-        if (!ethAddr) {
-            if (userData.profile.account[0].service == "ethereum") {
-                cookies.set('ethAddr', userData.profile.account[0].identifier)
-                this.setState({
-                    hasEthereum: true
-                })
-            } else {
-                this.setState({
-                    hasEthereum: false
-                })
+        // console.log(userData)
+
+        if (!ethAddress) {
+            if (userData.profile.account != undefined && userData.profile.account[0].service == "ethereum") {
+                cookies.set('ethAddress', userData.profile.account[0].identifier)
+                // this.setState({
+                //     hasEthereum: true
+                // })
             }
+            // else {
+            //     this.setState({
+            //         hasEthereum: false
+            //     })
+            // }
         }
     }
 
@@ -62,10 +65,10 @@ export class DashboardPage extends React.Component {
 
     render() {
         return (
-            <div className="box-layout">
-                <Fade>
-                    {
-                        this.state.hasEthereum ?
+            // <div className="box-layout">
+            //     <Fade>
+            //         {
+                        // this.state.hasEthereum ?
                         <div className="box-layout">
                             <Fade>
                                 <div className="box-layout__box">
@@ -86,12 +89,12 @@ export class DashboardPage extends React.Component {
                             </Fade>
             
                         </div>
-                        : 
-                        <div>Does not have eth</div>
-                    }
-                </Fade>
+                        // : 
+                        // <div>Does not have eth</div>
+            //         }
+            //     </Fade>
 
-            </div>
+            // </div>
         )
     }
 }

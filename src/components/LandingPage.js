@@ -21,11 +21,14 @@ export class LandingPage extends React.Component {
         if(!session.isUserSignedIn() && session.isSignInPending()) {
             session.handlePendingSignIn()
             .then((userData) => {
-                if(!userData.username) {
-                    throw new Error('This app requires a username.')
-                }
+                // if(!userData.username) {
+                //     throw new Error('This app requires a username.')
+                // }
                 window.location = '/';
             })
+            // .catch((e) => {
+            //     window.alert(e);
+            // });
         }
     }
 

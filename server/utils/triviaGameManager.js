@@ -33,6 +33,18 @@ class TriviaGameManager extends GameManager {
 
     };
 
+    addPlayer(room, name, socketID, ethAddress) {
+        var player = {
+            username: name,
+            id: socketID,
+            room,
+            score: 0,
+            ethAddress: ethAddress
+        };
+
+        this.players.push(player);
+        return player;
+    };
 
     getCurrentQuestion(room) {
         return this.quizzes[room].qs[0];

@@ -58,14 +58,14 @@ io.on("connection", (socket) => {
             if (g && g.active) {
                 return callback({
                     code: "NAMEERROR",
-                    msg: `Cannot join room ${config.name}. Game has already started.`
+                    msg: `Cannot join room ${config.room}. Game has already started.`
                 });
             };
 
             if (!games.checkRoomName(config.room)) {
                 if (games.checkUsername(config.room, config.name)) {
                     if (web3.utils.isAddress(config.ethAddress)) {
-                        games.addPlayer(config.room, config.name, config.username, socket.id);
+                        games.addPlayer(config.room, config.name, socket.id, config.ethAddress);
                         socket.join(config.room);
                         socket.emit("joinedRoom");
                         var game = games.getGameByRoom(config.room);
@@ -152,13 +152,12 @@ io.on("connection", (socket) => {
                     var response = [];
                     players.forEach((player) => {
                         var p = {
-                            bstackusername: player.name,
                             name: player.username,
                             score: player.score
                         };
                         response.push(p);
 
-                        sendTokens(player.username, player.score);
+                        sendTokens(player.ethAddress, player.score);
                     })
                     io.to(player.room).emit("msg");
                     io.to(player.room).emit("gameFinished", response);
@@ -247,6 +246,16 @@ function sendTokens(address, value) {
     })
     .on('error', console.error); // If there's an out of gas error the second parameter is the receipt.    
 }
+
+app.get('/manifest.json', (req, res, next) => {
+    res.set({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Methods': 'GET',
+      'X-random': 'random'
+    });
+    next();
+})
 
 app.use(express.static(publicPath));
 
